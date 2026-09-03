@@ -1,0 +1,32 @@
+# Environments
+.env
+venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.db
+app.db
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+
+# Node
+node_modules/
+dist/
+
+# Logs and databases
+*.log
+*.sqlite
+*.sqlite3
+
+# Other
+outputs/
