@@ -33,7 +33,14 @@ social-media-analysis/
 
 ## Setup Instructions
 
-### 1. Backend Setup
+### 1. Git Workflow Setup (Required)
+To enforce code quality and protect the `main` branch, we use a strict branching workflow. Run the following command once to activate the local Git hooks:
+```bash
+git config core.hooksPath .githooks
+```
+For detailed instructions on branching, committing, and creating Pull Requests, please read [CONTRIBUTING.md](CONTRIBUTING.md).
+
+### 2. Backend Setup
 Create a virtual environment and install dependencies:
 ```bash
 python -m venv venv
@@ -45,7 +52,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Frontend Setup
+### 3. Frontend Setup
 Navigate to the `frontend` directory and install Node.js dependencies:
 ```bash
 cd frontend
