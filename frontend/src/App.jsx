@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line, ScatterChart, Scatter, ZAxis, LabelList
 } from 'recharts';
-import { LayoutDashboard, MessageSquareText, Database, Download, Lightbulb, LogIn, Send, LogOut, UserPlus, X, TrendingUp, TrendingDown, Activity, Smile, AlertCircle, MessageCircle, Award, Sun, Moon, ArrowRight, Filter } from 'lucide-react';
+import { LayoutDashboard, MessageSquareText, Database, Download, Lightbulb, LogIn, Send, LogOut, UserPlus, X, TrendingUp, TrendingDown, Activity, Smile, AlertCircle, MessageCircle, Award, Sun, Moon, ArrowRight, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import './index.css';
 
 const SENTIMENT_COLORS = { positive: '#10b981', neutral: '#64748b', negative: '#f43f5e' };
@@ -113,6 +113,7 @@ function App() {
 
   // Dashboard State
   const [activeTab, setActiveTab] = useState('overview');
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [overviewMode, setOverviewMode] = useState('public');
   const [linkedAccounts, setLinkedAccounts] = useState([]);
   const [newLinkedAccount, setNewLinkedAccount] = useState('');
@@ -833,44 +834,72 @@ function App() {
   // MAIN DASHBOARD (logged in)
   // ========================
   return (
-    <>
-      {/* Dashboard top bar */}
-      <div className="dash-topbar">
-        <div className="brand">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
-            <path d="M22 12A10 10 0 0 0 12 2v10z" />
-          </svg>
-          Social Analytics
+    <div className={`dashboard-layout ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+      {/* Sidebar */}
+      <div className="dash-sidebar">
+        <div className="sidebar-brand">
+          {!isSidebarCollapsed && (
+            <>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+                <path d="M22 12A10 10 0 0 0 12 2v10z" />
+              </svg>
+              <span>Social Analytics</span>
+            </>
+          )}
+          {isSidebarCollapsed && (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ margin: '0 auto', flexShrink: 0 }}>
+              <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+              <path d="M22 12A10 10 0 0 0 12 2v10z" />
+            </svg>
+          )}
+          <button onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} className="sidebar-toggle" title="Toggle Sidebar">
+            {isSidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />} 
+          </button>
         </div>
-        <div className="dash-topbar-right">
-          <button onClick={() => setIsDarkTheme(!isDarkTheme)} style={{ background: 'none', border: 'none', color: '#94A3B8', cursor: 'pointer', display: 'flex', alignItems: 'center' }} title="Toggle Theme">
-            {isDarkTheme ? <Sun size={18} /> : <Moon size={18} />}
+        <div className="sidebar-divider" />
+        
+        <div className="sidebar-nav">
+          <button className={`sidebar-nav-btn ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')} title="The Big Picture">
+            <LayoutDashboard size={18} style={{ flexShrink: 0 }} /> <span className="sidebar-nav-btn-text">The Big Picture</span>
           </button>
-          <span className="welcome-text">Welcome, <strong>{username}</strong></span>
-          <button onClick={handleLogout} className="dash-logout-btn">
-            <LogOut size={15} /> Logout
+          <button className={`sidebar-nav-btn ${activeTab === 'sentiment' ? 'active' : ''}`} onClick={() => setActiveTab('sentiment')} title="Vibe Check">
+            <MessageSquareText size={18} style={{ flexShrink: 0 }} /> <span className="sidebar-nav-btn-text">Vibe Check</span>
           </button>
+          <button className={`sidebar-nav-btn ${activeTab === 'sandbox' ? 'active' : ''}`} onClick={() => setActiveTab('sandbox')} title="Viral Lab">
+            <Lightbulb size={18} style={{ flexShrink: 0 }} /> <span className="sidebar-nav-btn-text">Viral Lab</span>
+          </button>
+          <button className={`sidebar-nav-btn ${activeTab === 'data' ? 'active' : ''}`} onClick={() => setActiveTab('data')} title="Data Vault">
+            <Database size={18} style={{ flexShrink: 0 }} /> <span className="sidebar-nav-btn-text">Data Vault</span>
+          </button>
+        </div>
+
+        <div className="sidebar-bottom">
+          <div className="sidebar-divider" />
+          <div className="user-row">
+            {!isSidebarCollapsed && (
+              <>
+                <div className="user-avatar">{username ? username.charAt(0).toUpperCase() : 'U'}</div>
+                <div className="user-info">
+                  <span className="user-welcome">Welcome, {username}</span>
+                  <button onClick={handleLogout} className="sidebar-logout">
+                    <LogOut size={14} /> <span>Logout</span>
+                  </button>
+                </div>
+              </>
+            )}
+            {isSidebarCollapsed && (
+              <button onClick={handleLogout} className="sidebar-logout-icon" title="Logout">
+                <LogOut size={18} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
-    <div className="dashboard-container">
-
-      {/* Tabs */}
-      <div className="tabs">
-        <button className={`tab-btn ${activeTab === 'overview' ? 'active' : ''}`} onClick={() => setActiveTab('overview')}>
-          <LayoutDashboard size={20} /> The Big Picture
-        </button>
-        <button className={`tab-btn ${activeTab === 'sentiment' ? 'active' : ''}`} onClick={() => setActiveTab('sentiment')}>
-          <MessageSquareText size={20} /> Vibe Check
-        </button>
-        <button className={`tab-btn ${activeTab === 'sandbox' ? 'active' : ''}`} onClick={() => setActiveTab('sandbox')}>
-          <Lightbulb size={20} /> Viral Lab
-        </button>
-        <button className={`tab-btn ${activeTab === 'data' ? 'active' : ''}`} onClick={() => setActiveTab('data')}>
-          <Database size={20} /> Data Vault
-        </button>
-      </div>
+      {/* Main Content Area */}
+      <div className="dash-main-content">
+        <div className="dashboard-container" style={{ paddingTop: '2.5rem' }}>
 
       {/* Overview Tab */}
       {activeTab === 'overview' && (
@@ -1236,8 +1265,9 @@ function App() {
           </div>
         </>
       )}
+        </div>
+      </div>
     </div>
-    </>
   );
 }
 

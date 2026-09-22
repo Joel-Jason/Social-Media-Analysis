@@ -8,8 +8,8 @@ import json
 from google import genai
 from dotenv import load_dotenv
 
-from . import models
-from .database import engine, SessionLocal
+import models
+from database import engine, SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
 
