@@ -4,7 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line, ScatterChart, Scatter, ZAxis, LabelList
 } from 'recharts';
-import { LayoutDashboard, MessageSquareText, Database, Download, Lightbulb, LogIn, Send, LogOut, UserPlus, X, TrendingUp, TrendingDown, Activity, Smile, AlertCircle, MessageCircle, Award, Sun, Moon, ArrowRight, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, MessageSquareText, Database, Download, Lightbulb, LogIn, Send, LogOut, UserPlus, X, TrendingUp, TrendingDown, Activity, Smile, AlertCircle, MessageCircle, Award, Sun, Moon, ArrowRight, Filter, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import './index.css';
 
 const SENTIMENT_COLORS = { positive: '#10b981', neutral: '#64748b', negative: '#f43f5e' };
@@ -97,10 +97,13 @@ const generateSyntheticData = (username, platform) => {
 function App() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
 
   useEffect(() => {
     document.body.classList.toggle('dark-theme', isDarkTheme);
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
   }, [isDarkTheme]);
 
   // Auth State
@@ -853,8 +856,8 @@ function App() {
               <path d="M22 12A10 10 0 0 0 12 2v10z" />
             </svg>
           )}
-          <button onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} className="sidebar-toggle" title="Toggle Sidebar">
-            {isSidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />} 
+          <button onClick={() => setIsDarkTheme(!isDarkTheme)} className="sidebar-theme-btn" title="Toggle Theme">
+            {isDarkTheme ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
         <div className="sidebar-divider" />
@@ -895,6 +898,10 @@ function App() {
             )}
           </div>
         </div>
+
+        <button onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)} className="sidebar-collapse-bar" title="Toggle Sidebar">
+          {isSidebarCollapsed ? <ChevronsRight size={20} /> : <ChevronsLeft size={20} />} 
+        </button>
       </div>
 
       {/* Main Content Area */}
