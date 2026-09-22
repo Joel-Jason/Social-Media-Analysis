@@ -7,8 +7,8 @@ import {
 import { LayoutDashboard, MessageSquareText, Database, Download, Lightbulb, LogIn, Send, LogOut, UserPlus, X, TrendingUp, TrendingDown, Activity, Smile, AlertCircle, MessageCircle, Award, Sun, Moon, ArrowRight, Filter, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import './index.css';
 
-const SENTIMENT_COLORS = { positive: '#10b981', neutral: '#64748b', negative: '#f43f5e' };
-const PLATFORM_COLORS = ['#38BDF8', '#8B5CF6', '#22D3EE', '#F59E0B', '#D946EF', '#10b981'];
+const SENTIMENT_COLORS = { positive: '#3F7D58', neutral: '#8C8371', negative: '#AE4B3F' };
+const PLATFORM_COLORS = ['#B8873A', '#D6A94F', '#8C8371', '#756B5B', '#1B1710', '#A79C88'];
 const CHART_TOOLTIP_STYLE = { backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--text-body)' };
 
 // --- Synthetic Data Generation ---
@@ -350,7 +350,7 @@ function App() {
     if (topPlatform) {
       insights.push({
         icon: <Award size={18} />,
-        color: '#38BDF8', // blue
+        color: '#B8873A', // blue
         text: `${topPlatform} is currently the most engaging platform, driving the highest total interactions.`
       });
     }
@@ -367,19 +367,19 @@ function App() {
       if (secondHalfEng > firstHalfEng * 1.1) {
         insights.push({
           icon: <TrendingUp size={18} />,
-          color: '#10b981', // positive
+          color: '#3F7D58', // positive
           text: 'Engagement is trending upwards recently compared to earlier posts.'
         });
       } else if (secondHalfEng < firstHalfEng * 0.9) {
         insights.push({
           icon: <TrendingDown size={18} />,
-          color: '#f43f5e', // negative
+          color: '#AE4B3F', // negative
           text: 'Recent engagement has dipped slightly; consider experimenting with new topics or formats.'
         });
       } else {
         insights.push({
           icon: <Activity size={18} />,
-          color: '#8B5CF6', // violet
+          color: '#B8873A', // violet
           text: 'Audience engagement has remained stable across the recent timeline.'
         });
       }
@@ -390,19 +390,19 @@ function App() {
     if (dominant === 'positive') {
       insights.push({
         icon: <Smile size={18} />,
-        color: '#10b981',
+        color: '#3F7D58',
         text: 'The overall response to this content is overwhelmingly positive.'
       });
     } else if (dominant === 'negative') {
       insights.push({
         icon: <AlertCircle size={18} />,
-        color: '#f43f5e',
+        color: '#AE4B3F',
         text: 'There is a notable negative sentiment trend in the current dataset.'
       });
     } else {
       insights.push({
         icon: <MessageCircle size={18} />,
-        color: '#64748b',
+        color: '#8C8371',
         text: 'Audience sentiment is largely neutral and informational.'
       });
     }
@@ -590,12 +590,6 @@ function App() {
   if (!isLoggedIn) {
     return (
       <div className="landing-page">
-        <div className="mesh-bg">
-          <div className="mesh-blob blob-cyan" />
-          <div className="mesh-blob blob-violet" />
-          <div className="mesh-blob blob-magenta" />
-          <div className="mesh-blob blob-blue" />
-        </div>
 
         {/* Nav Bar */}
         <nav className="landing-nav">
@@ -631,6 +625,21 @@ function App() {
             </div>
           </section>
 
+          {/* Signal Ticker */}
+          <div className="signal-ticker">
+            <div className="ticker-track">
+              <div className="ticker-item"><span className="sentiment-badge sentiment-positive">Positive</span> "The new features are incredibly intuitive, feeling good about this launch."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-negative">Negative</span> "Uptime has been really poor today, missing the SLA completely."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-neutral">Neutral</span> "Just published a new guide on workflow automation, check the link."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-positive">Positive</span> "Absolutely loving the new ink & brass theme!"</div>
+              {/* Duplicate for seamless loop */}
+              <div className="ticker-item"><span className="sentiment-badge sentiment-positive">Positive</span> "The new features are incredibly intuitive, feeling good about this launch."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-negative">Negative</span> "Uptime has been really poor today, missing the SLA completely."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-neutral">Neutral</span> "Just published a new guide on workflow automation, check the link."</div>
+              <div className="ticker-item"><span className="sentiment-badge sentiment-positive">Positive</span> "Absolutely loving the new ink & brass theme!"</div>
+            </div>
+          </div>
+
           {/* Product Preview Section */}
           <section className="preview-section">
             <div className="preview-window">
@@ -640,19 +649,19 @@ function App() {
               </div>
               <div className="preview-body">
                 <div className="metrics-grid">
-                  <div className="glass-card" style={{ borderLeftColor: '#38BDF8' }}>
+                  <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
                     <div className="metric-title">Posts Analyzed</div>
                     <div className="metric-value">2,500</div>
                   </div>
-                  <div className="glass-card" style={{ borderLeftColor: '#8B5CF6' }}>
+                  <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
                     <div className="metric-title">Total Engagement</div>
                     <div className="metric-value">124,500</div>
                   </div>
-                  <div className="glass-card" style={{ borderLeftColor: '#22D3EE' }}>
+                  <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
                     <div className="metric-title">Avg. Engagement Rate</div>
                     <div className="metric-value">4.98%</div>
                   </div>
-                  <div className="glass-card" style={{ borderLeftColor: '#F59E0B' }}>
+                  <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
                     <div className="metric-title">Dominant Sentiment</div>
                     <div className="metric-value" style={{ color: 'var(--positive)' }}>Positive</div>
                   </div>
@@ -662,7 +671,7 @@ function App() {
                   <h3 className="insights-title"><Lightbulb size={16} /> Key Insights</h3>
                   <ul className="insights-list">
                     <li className="insight-item">
-                      <span className="insight-icon" style={{ color: '#10b981', background: 'rgba(16, 185, 129, 0.15)' }}>
+                      <span className="insight-icon" style={{ color: '#3F7D58', background: 'rgba(63,125,88,0.15)' }}>
                         <TrendingUp size={18} />
                       </span>
                       <span className="insight-text">Engagement is trending upwards recently compared to earlier posts.</span>
@@ -681,29 +690,29 @@ function App() {
             </div>
             
             <div className="features-grid">
-              <div className="glass-card feature-card" style={{ borderLeftColor: '#38BDF8' }}>
-                <div className="feature-icon" style={{ color: '#38BDF8', background: 'rgba(56, 189, 248, 0.1)' }}>
+              <div className="glass-card feature-card" style={{ borderLeftColor: '#B8873A' }}>
+                <div className="feature-icon" style={{ color: '#B8873A', background: 'rgba(184,135,58,0.10)' }}>
                   <LayoutDashboard size={24} />
                 </div>
                 <h3>Overview Dashboard</h3>
                 <p>Track your core metrics like total engagement and average engagement rate at a single glance.</p>
               </div>
-              <div className="glass-card feature-card" style={{ borderLeftColor: '#8B5CF6' }}>
-                <div className="feature-icon" style={{ color: '#8B5CF6', background: 'rgba(139, 92, 246, 0.1)' }}>
+              <div className="glass-card feature-card" style={{ borderLeftColor: '#B8873A' }}>
+                <div className="feature-icon" style={{ color: '#B8873A', background: 'rgba(184,135,58,0.10)' }}>
                   <MessageSquareText size={24} />
                 </div>
                 <h3>Sentiment Analysis</h3>
                 <p>Automatically classify posts as positive, negative, or neutral to understand the vibe of your audience.</p>
               </div>
-              <div className="glass-card feature-card" style={{ borderLeftColor: '#22D3EE' }}>
-                <div className="feature-icon" style={{ color: '#22D3EE', background: 'rgba(34, 211, 238, 0.1)' }}>
+              <div className="glass-card feature-card" style={{ borderLeftColor: '#B8873A' }}>
+                <div className="feature-icon" style={{ color: '#B8873A', background: 'rgba(184,135,58,0.10)' }}>
                   <Lightbulb size={24} />
                 </div>
                 <h3>Trending Words</h3>
                 <p>Discover exactly which topics and hashtags are driving the most conversation in your niche.</p>
               </div>
-              <div className="glass-card feature-card" style={{ borderLeftColor: '#F59E0B' }}>
-                <div className="feature-icon" style={{ color: '#F59E0B', background: 'rgba(245, 158, 11, 0.1)' }}>
+              <div className="glass-card feature-card" style={{ borderLeftColor: '#B8873A' }}>
+                <div className="feature-icon" style={{ color: '#B8873A', background: 'rgba(184,135,58,0.10)' }}>
                   <Database size={24} />
                 </div>
                 <h3>Data & Methodology</h3>
@@ -786,11 +795,11 @@ function App() {
     const engDiff = globalMetrics.avgEngagement - publicMetrics.avgEngagement;
     const engPercent = publicMetrics.avgEngagement > 0 ? Math.abs(engDiff / publicMetrics.avgEngagement) * 100 : 0;
     const engDirection = engDiff >= 0 ? '+' : '-';
-    const engColor = engDiff >= 0 ? '#10b981' : '#f59e0b';
+    const engColor = engDiff >= 0 ? '#3F7D58' : '#B8873A';
 
     const sentPercent = sentimentPercentile;
     const sentDirection = sentPercent >= 50 ? '+' : '-';
-    const sentColor = sentPercent >= 50 ? '#10b981' : '#f59e0b';
+    const sentColor = sentPercent >= 50 ? '#3F7D58' : '#B8873A';
     const sentText = sentPercent >= 50 ? `More positive than ${sentPercent}% of public posts` : `Less positive than ${100 - sentPercent}% of public posts`;
 
     return (
@@ -951,7 +960,7 @@ function App() {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {linkedAccounts.map((account, idx) => (
-                  <span key={idx} style={{ background: 'rgba(59, 110, 143, 0.1)', color: 'var(--steel)', padding: '0.25rem 0.75rem', borderRadius: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid rgba(59, 110, 143, 0.25)', fontSize: '0.9rem' }}>
+                  <span key={idx} style={{ background: 'rgba(184,135,58,0.10)', color: 'var(--steel)', padding: '0.25rem 0.75rem', borderRadius: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '1px solid rgba(184,135,58,0.25)', fontSize: '0.9rem' }}>
                     <strong>{account.platform}:</strong> {account.username}
                     <button onClick={() => handleRemoveLinkedAccount(account)} style={{ background: 'none', border: 'none', color: 'var(--steel)', cursor: 'pointer', padding: 0, fontSize: '1.2rem', lineHeight: 1, marginLeft: '0.25rem' }}>&times;</button>
                   </span>
@@ -988,11 +997,11 @@ function App() {
               <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={timeSeriesData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                    <XAxis dataKey="date" stroke="#6B7280" />
-                    <YAxis stroke="#6B7280" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                    <XAxis dataKey="date" stroke="var(--text-muted)" />
+                    <YAxis stroke="var(--text-muted)" />
                     <RechartsTooltip contentStyle={CHART_TOOLTIP_STYLE} />
-                    <Line type="monotone" dataKey="count" stroke="#38BDF8" strokeWidth={2.5} dot={{ r: 3, fill: '#38BDF8' }} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="count" stroke="#B8873A" strokeWidth={2.5} dot={{ r: 3, fill: '#B8873A' }} activeDot={{ r: 6 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -1002,11 +1011,11 @@ function App() {
               <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={platformData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                    <XAxis dataKey="name" stroke="#6B7280" />
-                    <YAxis stroke="#6B7280" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                    <XAxis dataKey="name" stroke="var(--text-muted)" />
+                    <YAxis stroke="var(--text-muted)" />
                     <RechartsTooltip contentStyle={CHART_TOOLTIP_STYLE} />
-                    <Bar dataKey="count" fill="#8884d8">
+                    <Bar dataKey="count" fill="var(--steel)">
                       {platformData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={PLATFORM_COLORS[index % PLATFORM_COLORS.length]} />
                       ))}
@@ -1054,14 +1063,14 @@ function App() {
               <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={topWordsData} layout="vertical" margin={{ top: 5, right: 40, left: 80, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" horizontal={true} vertical={false} />
-                    <XAxis type="number" stroke="#6B7280" hide />
-                    <YAxis dataKey="word" type="category" stroke="#6B7280" axisLine={false} tickLine={false} width={100} />
-                    <RechartsTooltip contentStyle={CHART_TOOLTIP_STYLE} cursor={{ fill: 'rgba(56, 189, 248, 0.05)' }} formatter={(value) => [`${value} occurrences`, 'Frequency']} />
-                    <Bar dataKey="count" fill="#38BDF8" radius={[0, 4, 4, 0]}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={true} vertical={false} />
+                    <XAxis type="number" stroke="var(--text-muted)" hide />
+                    <YAxis dataKey="word" type="category" stroke="var(--text-muted)" axisLine={false} tickLine={false} width={100} />
+                    <RechartsTooltip contentStyle={CHART_TOOLTIP_STYLE} cursor={{ fill: 'rgba(184,135,58,0.05)' }} formatter={(value) => [`${value} occurrences`, 'Frequency']} />
+                    <Bar dataKey="count" fill="#B8873A" radius={[0, 4, 4, 0]}>
                       <LabelList dataKey="count" position="right" fill="var(--text-muted)" fontSize={12} />
                       {topWordsData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.word.startsWith('#') ? '#8B5CF6' : '#38BDF8'} />
+                        <Cell key={`cell-${index}`} fill={entry.word.startsWith('#') ? '#B8873A' : '#D6A94F'} />
                       ))}
                     </Bar>
                   </BarChart>
@@ -1076,8 +1085,8 @@ function App() {
       {activeTab === 'sandbox' && (
         <div className="sandbox-container">
           <div className="glass-card">
-            <h2 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'IBM Plex Sans', sans-serif", color: 'var(--navy)' }}>
-              <Lightbulb color="#f59e0b" /> Idea Sandbox
+            <h2 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: "'Fraunces', serif", color: 'var(--navy)' }}>
+              <Lightbulb color="#B8873A" /> Idea Sandbox
             </h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
               Draft your social media post below. Our engine will analyze it against historical data to predict performance and suggest improvements.
@@ -1098,8 +1107,8 @@ function App() {
           </div>
 
           {sandboxFeedback.length > 0 && (
-            <div className="glass-card" style={{ marginTop: '2rem', border: '1px solid rgba(59, 110, 143, 0.2)' }}>
-              <h3 style={{ marginBottom: '1.25rem', color: 'var(--steel)', fontFamily: "'IBM Plex Sans', sans-serif" }}>Analysis Results</h3>
+            <div className="glass-card" style={{ marginTop: '2rem', border: '1px solid rgba(184,135,58,0.2)' }}>
+              <h3 style={{ marginBottom: '1.25rem', color: 'var(--steel)', fontFamily: "'Fraunces', serif" }}>Analysis Results</h3>
               <div className="suggestions-list" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {sandboxFeedback.map((fb, i) => (
                   <div key={i} className={`suggestion-card suggestion-${fb.type}`}>
@@ -1117,7 +1126,7 @@ function App() {
         <>
           <div className="charts-grid" style={{ marginBottom: '2rem' }}>
             {/* Methodology Panel */}
-            <div className="glass-card" style={{ borderLeftColor: '#8B5CF6' }}>
+            <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
               <div className="chart-header">Data Source & Methodology</div>
               <div style={{ color: 'var(--text-body)', fontSize: '0.95rem', lineHeight: '1.6' }}>
                 <p style={{ marginBottom: '1rem' }}>
@@ -1137,7 +1146,7 @@ function App() {
             </div>
 
             {/* Preprocessing Example */}
-            <div className="glass-card" style={{ borderLeftColor: '#38BDF8' }}>
+            <div className="glass-card" style={{ borderLeftColor: '#B8873A' }}>
               <div className="chart-header">Preprocessing Pipeline</div>
               <div style={{ color: 'var(--text-body)', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '1rem' }}>
                 <strong>Steps Applied:</strong>
@@ -1153,11 +1162,11 @@ function App() {
                   return (
                     <div style={{ background: 'var(--bg-card)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
                       <div style={{ marginBottom: '0.75rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', color: '#f43f5e' }}>Raw Input</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', color: '#AE4B3F' }}>Raw Input</span>
                         <div style={{ fontStyle: 'italic', marginTop: '0.25rem', color: 'var(--text-muted)' }}>"{example.text}"</div>
                       </div>
                       <div>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', color: '#10b981' }}>Cleaned Output</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', color: '#3F7D58' }}>Cleaned Output</span>
                         <div style={{ marginTop: '0.25rem', color: 'var(--navy)', fontWeight: '500' }}>"{example.cleaned_text}"</div>
                       </div>
                     </div>
